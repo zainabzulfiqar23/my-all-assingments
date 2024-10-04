@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Machine</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+<div class="atm-container">
+<h1>ATM Machine</h1>
+<div id="message"></div>
+<div class="balance">
+<p>Current Balance: <span id="balance">1000</span></p>
+</div>
+
+<input type="number" id="amount" placeholder="Enter amount" /><br>
+<button onclick="deposit()">Deposit</button><br>
+<button onclick="withdraw()">Withdraw</button><br>
+</div>    
+
+
+<script>
+let balance = 1000;
+
+function updateBalanceDisplay() {
+    document.getElementById('balance').textContent = balance;
+}
+
+function deposit() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const messageDiv = document.getElementById('message');
+
+if (isNaN(amount) || amount <= 0) {
+    messageDiv.textContent = "Please enter a valid amount.";
+return;
+}
+
+balance += amount;
+messageDiv.textContent = `You deposited $${amount}.`;
+updateBalanceDisplay();
+document.getElementById('amount').value = '';
+}
+
+function withdraw() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const messageDiv = document.getElementById('message');
+    if (isNaN(amount) || amount <= 0) {
+    messageDiv.textContent = "Please enter a valid amount.";
+return;
+}
+
+if (amount > balance) {
+    messageDiv.textContent = "Insufficient funds.";
+return;
+}
+
+balance -= amount;
+messageDiv.textContent = `You withdrew $${amount}.`;
+updateBalanceDisplay();
+document.getElementById('amount').value = '';
+}
+</script>
+
+
+
+
+</body>
+</html>
